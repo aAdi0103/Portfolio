@@ -27,6 +27,9 @@
             margin: 0;
             background: #0f172a;
         }
+        #main{
+          position: relative;
+        }
 
         @keyframes pulse {
             0% {
@@ -45,6 +48,30 @@
             }
         }
         /* From Uiverse.io by mobinkakei */ 
+
+
+        .nav-link {
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+}
+
+.nav-link::after {
+    content: "";
+    position: absolute;
+    bottom: -4px; /* Adjust to position the line */
+    left: 0;
+    width: 0;
+    height: 2px; /* Thickness of the line */
+    background-color: #14b8a6; /* Color of the line */
+    transition: width 0.3s ease-in-out, left 0.3s ease-in-out;
+}
+
+.nav-link:hover::after {
+    width: 100%;
+    left: 0;
+}
+
 .btn {
   width: 140px;
   height: 50px; 
@@ -171,7 +198,7 @@
     position: fixed;
     top: 15px; /* Adjust the position as necessary */
     right: 20px; /* Adjust the position as necessary */
-    z-index: 1000; /* Higher z-index ensures it's above other content */
+    /* z-index: 10; */
     cursor: pointer;
 }
 
@@ -253,102 +280,160 @@
     transform: scale3d(1, 1, 1);
   }
 }
+#loader {
+        position: fixed;
+        inset: 0;
+        background-color: #0F172A;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        z-index: 100;
+        overflow: hidden;
+    }
+
+    .dots span {
+        opacity: 0;
+        transition: opacity 0.2s ease-in-out;
+    }
+    #cursormain {
+    position: absolute;
+    width: 15px;
+    height: 15px;
+    mix-blend-mode: difference;
+    background: rgb(4, 174, 174);
+    border-radius: 50%;
+    pointer-events: none; /* Ensure it doesn't block interactions */
+    transform: translate(-50%, -50%); /* Center cursor perfectly */
+    z-index: 9999; /* Make sure it stays on top */
+}
+@media (max-width: 600px) {
+    #navbar {
+      /* margin-top: -50px; */
+        position: static; /* Ensure it isn't fixed on small screens */
+        box-shadow: none; /* Remove the shadow for a cleaner look */
+    }
+    #hamburger {
+        position: static; /* Ensure it isn't fixed on small screens */
+    }
+}
+
+
 
     </style>
 </head>
 
 <body>
+  
+  <div id="loader" class="fixed inset-0 flex items-center justify-center bg-[#0F172A] z-[100]">
+    <div class="text-center text-white text-4xl font-normal flex items-center gap-1">
+      <span class="bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">Loading</span>
+      <span class="dots">
+            <span id="dot1">.</span>
+            <span id="dot2">.</span>
+            <span id="dot3">.</span>
+        </span>
+    </div>
+</div>
     <!-- Main Content -->
 
     <div id="main" class="relative overflow-x-hidden w-full flex flex-col items-center min-h-screen">
-
-        <div id="navbar" class="w-full px-5 pt-3 bg-opacity-85 shadow-lg z-50 fixed top-0 left-0 right-0 flex items-center justify-between bg-[#0F172A]">
-            <!-- Name only with 3D effect -->
-            <div class="relative text-lg font-extrabold uppercase tracking-wide max-md:text-[10px] text-transparent bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 bg-clip-text">
-                Port<span class="inline-block text-4xl text-purple-500 scale-110 rotate-3 tracking-normal">O</span>lio
-                <span class="absolute inset-0 w-full h-full animate-pulse bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 opacity-10 blur-lg rounded-lg"></span>
-            </div>
-        
-            <!-- Navbar Links (for larger screens) -->
-            <div class="hidden md:flex gap-14 text-white">
-                <a href="#home" class="text-lg font-semibold uppercase hover:text-teal-400">Home</a>
-                <a href="#about" class="text-lg font-semibold uppercase hover:text-teal-400">About</a>
-                <a href="#contact" class="text-lg font-semibold uppercase hover:text-teal-400">Contact</a>
-            </div>
-        
-            <!-- GitHub Profile Button -->
-            <div class="flex gap-4 justify-center max-md:hidden">
-                <!-- Resume Section -->
-                <button class="btn bg-gradient-to-t from-[#012274] via-[#12376e] to-[#23487f]">
-                    <span class="btn-text-one">Resume</span>
-                    <span class="btn-text-two"><a href="https://drive.google.com/file/d/1QYrqCVO629oHLBSmPEvZozUOvP8S9yEH/view?usp=sharing" target="_blank">Resume</a></span>
-                </button>
-        
-                <!-- GitHub Section -->
-                <div class="p-4 h-[8vh] mt-2 bg-gray-800 rounded-lg shadow-lg flex items-center space-x-4 transition-all hover:bg-gray-700">
-                    <a href="https://github.com/aAdi0103" target="_blank" class="flex items-center text-white hover:text-teal-400">
-                        <i class="ri-github-fill text-2xl"></i>
-                        <span class="ml-2 text-lg">GitHub Profile</span>
-                    </a>
-                </div>
-            </div>
-        
-            <!-- Hamburger Menu (for small screens) -->
-            <div class="text-white md:hidden">
-                <i class="ri-menu-2-line text-2xl cursor-pointer" id="hamburger"></i>
-            </div>
+       <div id="cursormain"></div>
+     <div id="home">
+      <div id="navbar" class="w-full px-5 pt-3 bg-opacity-85 shadow-lg z-50 fixed top-0 left-0 right-0 flex items-center justify-between bg-[#0F172A]">
+        <!-- Name only with 3D effect -->
+        <div class="relative text-lg font-extrabold uppercase tracking-wide max-md:text-[10px] text-transparent bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 bg-clip-text">
+            Port<span class="inline-block text-4xl text-purple-500 scale-110 rotate-3 tracking-normal">O</span>lio
+            <span class="absolute inset-0 w-full h-full animate-pulse bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 opacity-10 blur-lg rounded-lg"></span>
         </div>
-        
-        <!-- Mobile Menu -->
-        <div id="mobile-menu" class="hidden absolute top-[60px] left-0 w-full p-2 bg-gray-800 bg-opacity-95 z-50 flex flex-col items-center py-2 space-y-4 text-white">
-            <a href="#home" class="text-[15px] font-semibold uppercase hover:text-teal-400">Home</a>
-            <a href="#about" class="text-[15px] font-semibold uppercase hover:text-teal-400">About</a>
-            <a href="#contact" class="text-[15px] font-semibold uppercase hover:text-teal-400">Contact</a>
-        
-            <div class="flex items-center space-x-3 px-2 py-2 bg-red-400 rounded-md">
-                <a href="https://github.com/aAdi0103" target="_blank" class="flex items-center">
-                    <i class="ri-github-fill"></i>
-                    <span class="ml-1">GitHub Profile</span>
+    
+        <!-- Navbar Links (for larger screens) -->
+        <div class="hidden md:flex gap-14 text-white">
+          <a href="#home" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Home</a>
+          <a href="#education" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Education</a>
+          <a href="#projects" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Projects</a>
+          <a href="#contact" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Contact</a>
+      </div>
+      
+    
+        <!-- GitHub Profile Button -->
+        <div class="flex gap-4 justify-center max-md:hidden">
+            <!-- Resume Section -->
+            <button class="btn bg-gradient-to-t from-[#012274] via-[#12376e] to-[#23487f]">
+                <span class="btn-text-one">Resume</span>
+                <span class="btn-text-two"><a href="https://drive.google.com/file/d/1QYrqCVO629oHLBSmPEvZozUOvP8S9yEH/view?usp=sharing" target="_blank">Resume</a></span>
+            </button>
+    
+            <!-- GitHub Section -->
+            <div class="p-4 h-[8vh] mt-2 bg-gray-800 rounded-lg shadow-lg flex items-center space-x-4 transition-all hover:bg-gray-700">
+                <a href="https://github.com/aAdi0103" target="_blank" class="flex items-center text-white hover:text-teal-400">
+                    <i class="ri-github-fill text-2xl"></i>
+                    <span class="ml-2 text-lg">GitHub Profile</span>
                 </a>
             </div>
         </div>
-        
-        
-        <!-- Content Below the Navbar (for scrolling effect) -->
-        <div class="pt-10">
-            <!-- This content will be pushed down, ensuring the navbar doesn't overlap with it -->
-            <!-- Add more content here -->
+    
+        <!-- Hamburger Menu (for small screens) -->
+        <div class="text-white md:hidden flex items-center gap-10">
+          <button class="btn bg-gradient-to-t from-[#012274] via-[#12376e] to-[#23487f]">
+            <span class="btn-text-one">Resume</span>
+            <span class="btn-text-two text-2xl"><a href="https://drive.google.com/file/d/1QYrqCVO629oHLBSmPEvZozUOvP8S9yEH/view?usp=sharing" target="_blank">Resume</a></span>
+        </button>
+            <i class="ri-menu-2-line text-2xl cursor-pointer" id="hamburger"></i>
         </div>
+    </div>
+    
+    <!-- Mobile Menu -->
+    <div id="mobile-menu" class="hidden absolute top-[60px] left-5 rounded-md w-[90%] p-2 bg-gray-800 bg-opacity-95 z-50 flex flex-col items-center py-2 space-y-4 text-white">
+      <a href="#home" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Home</a>
+      <a href="#education" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Education</a>
+      <a href="#projects" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Projects</a>
+      <a href="#contact" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Contact</a>
+    
+      <div class="p-4 h-[8vh] mt-2 bg-gray-400 rounded-lg shadow-lg flex items-center space-x-4 transition-all hover:bg-gray-700">
+        <a href="https://github.com/aAdi0103" target="_blank" class="flex items-center text-white hover:text-teal-400">
+            <i class="ri-github-fill text-2xl"></i>
+            <span class="ml-2 text-lg">GitHub Profile</span>
+        </a>
+    </div>
+    </div>
+    
+    
+    <!-- Content Below the Navbar (for scrolling effect) -->
+    <div class="pt-10 max-md:p-1">
+        <!-- This content will be pushed down, ensuring the navbar doesn't overlap with it -->
+        <!-- Add more content here -->
+    </div>
 
-        <!-- Intro Section -->
-        <div class="relative w-[100vw] flex mt-10 max-md:flex-col max-md:items-start max-md:p-5">
-            <!-- Left Section -->
-            <div class="p-16 max-md:p-5 max-md:w-[85vw]">
-                <div class="h-[8vh]  overflow-hidden max-md:h-[4vh]">
-                    <h1 id="animatedText" class="text-5xl font-bold text-white mb-2 max-md:text-[28px]">Hi, I am</h1>
-                </div>
-                <div class="h-[13vh] max-md:h-[5vh]  overflow-hidden">
-                    <h1 id="animatedText" class="text-7xl font-extrabold text-white mb-3 max-md:text-[28px] max-md:font-bold">
-                        Aditya Kumar
-                    </h1>
-                </div>
-                <h1 class="text-4xl font-semibold text-white max-md:text-[28px]">
-                    I am a <span id="typing-text" class="text-blue-500 font-bold max-md:text-[15px]"></span>
-                    <span id="cursor" class="text-blue-500 font-bold">|</span>
+    <!-- Intro Section -->
+    <div class="relative w-[100vw] flex mt-10 max-md:flex-col max-md:items-start max-md:p-5">
+        <!-- Left Section -->
+        <div class="p-16 max-md:p-5 max-md:w-[85vw]">
+            <div class="h-[8vh]  overflow-hidden max-md:h-[4vh]">
+                <h1 id="animatedText" class="text-5xl font-bold text-white mb-2 max-md:text-[28px]">Hi, I am</h1>
+            </div>
+            <div class="h-[13vh] max-md:h-[5vh]  overflow-hidden">
+                <h1 id="animatedText" class="text-7xl font-extrabold text-white mb-3 max-md:text-[28px] max-md:font-bold">
+                    Aditya Kumar
                 </h1>
-                <p class="text-lg font-mono text-white mt-5 opacity-70 max-md:mt-2 max-md:text-sm w-[45vw] max-md:w-[75vw]">
-                    I’m Aditya Kumar, a MERN stack developer, programmer, and DSA enthusiast with a passion for creating
-                    efficient, user-friendly web applications and solving complex problems. With a passion for learning,
-                    I am dedicated to delivering high-quality results. I love exploring new technologies and contributing
-                    to innovative projects that make a meaningful impact.
-                </p>
             </div>
-            
-            <!-- Right Section -->
-            <div class="w-[23vw] h-[23vw] rounded-full overflow-hidden mt-9 mr-20 bg-center max-md:w-[30vw] max-md:h-[30vw] max-md:left-[68vw] absolute top-[-20px] right-0">
-                <img src="./assets/Screenshot 2024-11-21 231044.png" alt="Profile Picture" class="w-full h-full object-cover">
-            </div>
+            <h1 class="text-4xl font-semibold text-white max-md:text-[28px]">
+                I am a <span id="typing-text" class="text-blue-500 font-bold max-md:text-[15px]"></span>
+                <span id="cursor" class="text-blue-500 font-bold">|</span>
+            </h1>
+            <p class="text-lg font-mono text-white mt-5 opacity-70 max-md:mt-2 max-md:text-sm w-[45vw] max-md:w-[75vw]">
+                I’m Aditya Kumar, a MERN stack developer, programmer, and DSA enthusiast with a passion for creating
+                efficient, user-friendly web applications and solving complex problems. With a passion for learning,
+                I am dedicated to delivering high-quality results. I love exploring new technologies and contributing
+                to innovative projects that make a meaningful impact.
+            </p>
         </div>
+        
+        <!-- Right Section -->
+        <div class="w-[23vw] h-[23vw] rounded-full overflow-hidden mt-9 mr-20 bg-center max-md:w-[30vw] max-md:h-[30vw] max-md:left-[68vw] absolute top-[-20px] right-0">
+            <img src="./assets/Screenshot 2024-11-21 231044.png" alt="Profile Picture" class="w-full h-full object-cover">
+        </div>
+    </div>
+     </div>
         
      <div class="w-full min-h-[100vh] flex flex-col bg-gray-900 py-10">
             <!-- Heading Section -->
@@ -443,7 +528,7 @@
                 
             
                 <!-- Project Sections -->
-                <div class="w-full min-h-[100vh] space-y-8 mb-20">
+                <div class="w-full min-h-[100vh] space-y-8 mb-20 max-md:mb-2">
                     
                     <!-- Frontend Projects -->
                     <section id="tranding frontendProjects">
@@ -541,7 +626,7 @@
                                 </div>
                                 <div class="tranding-slide-content">
                                     <div class="tranding-slide-content-bottom">
-                                        <h2 class="mb-[15px] max-md:mb-[2px] font-extrabold text-4xl font-mono text-black max-md:ml-10 max-md:text-2xl max-md:font-sans max-md:text-white">
+                                        <h2 class="mb-[15px] max-md:mb-[2px] font-extrabold text-4xl font-mono text-white max-md:ml-10 max-md:text-2xl max-md:font-sans max-md:text-white">
                                           Dribble Clone
                                         </h2>
                                        <div class="flex gap-10 max-md:ml-10">
@@ -609,6 +694,45 @@
                                       </div>
                                 </div>
                               </div>
+                              <div class="swiper-slide tranding-slide bg-black">
+                                <div class="tranding-slide-img">
+                                  <img class="max-md:bg-cover" src="./assets/Screenshot 2024-11-28 231314.png" alt="Tranding">
+                                </div>
+                                <div class="tranding-slide-content">
+                                    <div class="tranding-slide-content-bottom">
+                                        <h2 class="mb-[15px] max-md:mb-[2px] font-extrabold text-2xl font-mono text-white max-md:ml-10 max-md:text-xl max-md:font-sans max-md:text-white">
+                                          Movie Recommendations webApp
+                                        </h2>
+                                       <div class="flex gap-10 max-md:ml-10">
+                                        <button class="Btn2">
+                                            <a href="https://github.com/aAdi0103/Movie-Recommendation" target="_blank">Explore</a>
+                                          </button>
+    <button
+      type="submit"
+      class="flex justify-center gap-2 items-center mx-auto shadow-xl text-lg bg-gray-50 backdrop-blur-md lg:font-semibold isolation-auto border-gray-50 before:absolute before:w-full before:transition-all before:duration-700 before:hover:w-full before:-left-full before:hover:left-0 before:rounded-full before:bg-emerald-500 hover:text-gray-50 before:-z-10 before:aspect-square before:hover:scale-150 before:hover:duration-700 relative z-10 px-4 py-2 overflow-hidden border-2 rounded-full group text-black"
+    >
+    <a href="https://github.com/aAdi0103/Movie-Recommendation" target="_blank">Vist</a>
+      <svg
+        class="w-8 h-8 justify-end group-hover:rotate-90 group-hover:bg-gray-50 text-gray-50 ease-linear duration-300 rounded-full border border-gray-700 group-hover:border-none p-2 rotate-45"
+        viewBox="0 0 16 19"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M7 18C7 18.5523 7.44772 19 8 19C8.55228 19 9 18.5523 9 18H7ZM8.70711 0.292893C8.31658 -0.0976311 7.68342 -0.0976311 7.29289 0.292893L0.928932 6.65685C0.538408 7.04738 0.538408 7.68054 0.928932 8.07107C1.31946 8.46159 1.95262 8.46159 2.34315 8.07107L8 2.41421L13.6569 8.07107C14.0474 8.46159 14.6805 8.46159 15.0711 8.07107C15.4616 7.68054 15.4616 7.04738 15.0711 6.65685L8.70711 0.292893ZM9 18L9 1H7L7 18H9Z"
+          class="fill-gray-800 group-hover:fill-gray-800"
+        ></path>
+      </svg>
+    </button>
+    
+                                          
+                                       </div>
+    
+                                      </div>
+                                </div>
+                              </div>
+
+
+
                             </div>
                   
                             <div class="tranding-slider-control mt-20">
@@ -808,105 +932,15 @@
             
                     <!-- Fullstack Projects -->
                     <section id="tranding fullstackprojects">
-                          <h1 class="text-center section-heading">Fullstack Projects</h1>
-                        <div class="container">
-                          <div class="swiper tranding-slider">
-                            <div class="swiper-wrapper">
-                              <!-- Slide-start -->
-                              <div class="swiper-slide tranding-slide">
-                                <div class="tranding-slide-img">
-                                  <img src="images/tranding-food-1.png" alt="Tranding">
-                                </div>
-                                <div class="tranding-slide-content">
-                                  <h1 class="food-price">$20</h1>
-                                  <div class="tranding-slide-content-bottom">
-                                    <h2 class="food-name">
-                                      Special Pizza
-                                    </h2>
-                                    <h3 class="food-rating">
-                                      <span>4.5</span>
-                                      <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                      </div>
-                                    </h3>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- Slide-end -->
-                              <!-- Slide-start -->
-                              <div class="swiper-slide tranding-slide">
-                                <div class="tranding-slide-img">
-                                  <img src="images/tranding-food-2.png" alt="Tranding">
-                                </div>
-                                <div class="tranding-slide-content">
-                                  <h1 class="food-price">$20</h1>
-                                  <div class="tranding-slide-content-bottom">
-                                    <h2 class="food-name">
-                                      Meat Ball
-                                    </h2>
-                                    <h3 class="food-rating">
-                                      <span>4.5</span>
-                                      <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                      </div>
-                                    </h3>
-                                  </div>
-                                </div>
-                              </div>
-                              <!-- Slide-end -->
-                              <!-- Slide-start -->
-                              <div class="swiper-slide tranding-slide">
-                                <div class="tranding-slide-img">
-                                  <img src="images/tranding-food-3.png" alt="Tranding">
-                                </div>
-                                <div class="tranding-slide-content">
-                                  <h1 class="food-price">$40</h1>
-                                  <div class="tranding-slide-content-bottom">
-                                    <h2 class="food-name">
-                                      Burger
-                                    </h2>
-                                    <h3 class="food-rating">
-                                      <span>4.5</span>
-                                      <div class="rating">
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                        <ion-icon name="star"></ion-icon>
-                                      </div>
-                                    </h3>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                  
-                            <div class="tranding-slider-control">
-                              <div class="swiper-button-prev slider-arrow">
-                                <ion-icon name="arrow-back-outline"></ion-icon>
-                              </div>
-                              <div class="swiper-button-next slider-arrow">
-                                <ion-icon name="arrow-forward-outline"></ion-icon>
-                              </div>
-                              <div class="swiper-pagination"></div>
-                            </div>
-                  
-                          </div>
-                        </div>
                       </section>
+
+                      
                 </div>
 
             </div>
             
            <!-- Educatuion -->
-           <div id="education" class="min-h-[100vh] w-full mt-6 p-4 flex justify-center gap-[5vw] items-center max-md:p-3">
+           <div id="education" class="opacity-0 min-h-[100vh] w-full mt-6 max-md:mt-[-30px] p-4 flex justify-center gap-[5vw] items-center max-md:p-3">
             <!-- Left Section -->
             <div class="flex gap-7 justify-center items-center">
               <div>
@@ -1026,6 +1060,8 @@
     <!-- Canvas for Stars Background -->
     <canvas id="particles"></canvas>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.11.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+
     <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
     <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
     <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
@@ -1039,6 +1075,42 @@
         // Select elements from the DOM
         const hamburger = document.querySelector("#hamburger");
 const menu = document.querySelector("#mobile-menu");
+let isMenuOpen = false; // Track the menu state
+
+// GSAP timeline for slide animation
+const menuTimeline = gsap.timeline({ paused: true });
+
+menuTimeline
+    .fromTo(
+        menu,
+        { y: "-100%", opacity: 0, display: "none" }, // Hidden state
+        { y: "0%", opacity: 1, display: "flex", duration: 0.5, ease: "power2.out" } // Visible state
+    )
+    .reverse(); // Start reversed to hide initially
+
+// Hamburger menu click handler
+hamburger.addEventListener("click", () => {
+    isMenuOpen = !isMenuOpen;
+
+    // Toggle animation
+    menuTimeline.reversed() ? menuTimeline.play() : menuTimeline.reverse();
+
+    // Change icon
+    hamburger.classList.toggle("ri-menu-2-line", !isMenuOpen);
+    hamburger.classList.toggle("ri-close-line", isMenuOpen);
+});
+
+// Close menu on outside click
+document.addEventListener("click", (event) => {
+    if (!menu.contains(event.target) && !hamburger.contains(event.target) && isMenuOpen) {
+        isMenuOpen = false;
+
+        menuTimeline.reverse(); // Hide the menu
+        hamburger.classList.add("ri-menu-2-line");
+        hamburger.classList.remove("ri-close-line");
+    }
+});
+
 
 hamburger.addEventListener("click", () => {
     menu.classList.toggle("hidden");
@@ -1050,6 +1122,22 @@ document.addEventListener("click", (event) => {
         menu.classList.add("hidden");
     }
 });
+
+// Register ScrollTrigger plugin
+gsap.registerPlugin(ScrollTrigger);
+
+// Animate the #education section
+gsap.to("#education", {
+    opacity: 1, // Fade in
+    duration: 1.5, // Animation duration
+    ease: "power2.out", // Easing function
+    scrollTrigger: {
+        trigger: "#education", // Trigger when #education enters the viewport
+        start: "top 75%", // Trigger animation when the top of #education is 75% down the viewport
+        toggleActions: "play none none none", // Play on enter, no action on leave
+    },
+});
+
 
 
     </script>

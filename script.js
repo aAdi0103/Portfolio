@@ -287,10 +287,11 @@ var swiper = new Swiper(".mySwiper", {
     // Select the text element by its ID
     document.addEventListener("DOMContentLoaded", function () {
         gsap.from("#animatedText", {
-          duration: 2.5,           // Duration of the animation (1 second)
+          duration: 2,           // Duration of the animation (1 second)
           y: "100%",             // Start position from 100% below its container
           opacity: 0,            // Start with 0 opacity (invisible)
-          ease: "power3.out"     // Easing for smooth animation
+          ease: "power3.out" ,
+          delay:4,    // Easing for smooth animation
         });
       });
 
@@ -318,4 +319,43 @@ var TrandingSlider = new Swiper('.tranding-slider', {
 	}
   });
   
-      
+      document.addEventListener("DOMContentLoaded", () => {
+        // Animate the dots
+        gsap.timeline({ repeat: -1 })
+            .to("#dot1", { opacity: 1, duration: 0.4 })
+            .to("#dot2", { opacity: 1, duration: 0.4 })
+            .to("#dot3", { opacity: 1, duration: 0.4 })
+            .to("#dot1, #dot2, #dot3", { opacity: 0, duration: 0.2, delay: 0.1 });
+
+        // Move loader upwards after the content is ready
+        setTimeout(() => {
+            gsap.to("#loader", { 
+                y: "-100%",  // Moves loader up out of view
+                duration: 1.5, 
+                ease: "power2.inOut",
+                onComplete: () => {
+                    document.getElementById("loader").style.display = "none"; // Hide loader completely after animation
+                    document.getElementById("main").classList.remove("hidden"); // Show main content
+                }
+            });
+        }, 3000); // Adjust the delay based on content load time
+    });
+
+    const main = document.getElementById("main");
+    const cursorNew = document.getElementById("cursormain");
+    
+    // Ensure mouse coordinates align with the custom cursor
+    main.addEventListener("mousemove", (e) => {
+        const rect = main.getBoundingClientRect(); // Get bounding box of #main
+        const mouseX = e.clientX - rect.left; // Mouse X relative to #main
+        const mouseY = e.clientY - rect.top;  // Mouse Y relative to #main
+          
+        gsap.to(cursorNew, {
+            x: mouseX - 600,  // Subtract a number, not a string
+            y: mouseY,  // Subtract a number, not a string
+            duration: 1, // Faster animation to reduce lag
+            ease: "power3.out", // Smooth easing
+        });
+        
+    });
+    
