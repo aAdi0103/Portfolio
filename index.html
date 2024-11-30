@@ -281,7 +281,7 @@
     transform: scale3d(1, 1, 1);
   }
 }
-#loader {
+/* #loader {
         position: fixed;
         inset: 0;
         background-color: #0F172A;
@@ -295,7 +295,7 @@
     .dots span {
         opacity: 0;
         transition: opacity 0.2s ease-in-out;
-    }
+    } */
     #cursormain {
     position: absolute;
     width: 15px;
@@ -317,7 +317,112 @@
         position: static; /* Ensure it isn't fixed on small screens */
     }
 }
+/* Loader Container */
+.loader-container {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #0F172A;
+  z-index: 100;
+}
 
+/* Hexagon Container */
+.hexagon {
+  position: relative;
+  width: 120px;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+}
+
+/* Hexagon Edges */
+.edge {
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  opacity: 0;
+}
+
+.edge1 {
+  border-width: 0 60px 52px 60px;
+  border-color: transparent transparent teal transparent;
+  animation: form-edge 2s linear 0s forwards;
+}
+.edge2 {
+  border-width: 52px 60px 0 60px;
+  border-color: teal transparent transparent transparent;
+  animation: form-edge 2s linear 0.2s forwards;
+}
+.edge3 {
+  border-width: 52px 60px 0 60px;
+  border-color: teal transparent transparent transparent;
+  transform: rotate(60deg);
+  animation: form-edge 2s linear 0.4s forwards;
+}
+.edge4 {
+  border-width: 52px 60px 0 60px;
+  border-color: teal transparent transparent transparent;
+  transform: rotate(120deg);
+  animation: form-edge 2s linear 0.6s forwards;
+}
+.edge5 {
+  border-width: 52px 60px 0 60px;
+  border-color: teal transparent transparent transparent;
+  transform: rotate(180deg);
+  animation: form-edge 2s linear 0.8s forwards;
+}
+.edge6 {
+  border-width: 52px 60px 0 60px;
+  border-color: teal transparent transparent transparent;
+  transform: rotate(240deg);
+  animation: form-edge 2s linear 1s forwards;
+}
+
+/* Character Animation */
+.char {
+  position: absolute;
+  font-size: 40px;
+  font-weight: bold;
+  color: white;
+  opacity: 0;
+  animation: char-fade 1s ease-in-out 1s forwards;
+}
+
+/* Animations */
+@keyframes form-edge {
+  0% {
+    opacity: 0;
+    transform: scale(0.5);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes char-fade {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* Loader Removal */
+@keyframes fade-out {
+  0% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
 
 
     </style>
@@ -347,19 +452,19 @@
     <!-- Divider Line -->
     <div class="w-px h-12 bg-gray-300"></div>
 </div>
-
-  
-  <div id="loader" class="fixed inset-0 flex items-center justify-center bg-[#0F172A] z-[100]">
-    <div class="text-center text-white text-4xl font-normal flex items-center gap-1">
-      <span class="bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 bg-clip-text text-transparent">Loading</span>
-      <span class="dots">
-            <span id="dot1">.</span>
-            <span id="dot2">.</span>
-            <span id="dot3">.</span>
-        </span>
-    </div>
+<div id="loader" class="loader-container">
+  <div class="hexagon">
+    <div class="edge edge1"></div>
+    <div class="edge edge2"></div>
+    <div class="edge edge3"></div>
+    <div class="edge edge4"></div>
+    <div class="edge edge5"></div>
+    <div class="edge edge6"></div>
+    <div class="char">A</div>
+  </div>
 </div>
-    <!-- Main Content -->
+
+
 
     <div id="main" class="relative overflow-x-hidden w-full flex flex-col items-center min-h-screen">
        <div id="cursormain"></div>
@@ -372,10 +477,11 @@
         </div>
     
         <!-- Navbar Links (for larger screens) -->
-        <div class="hidden md:flex gap-14 text-white">
+        <div class="hidden md:flex gap-10 text-white">
           <a href="#home" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Home</a>
           <a href="#education" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Education</a>
           <a href="#projects" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Projects</a>
+          <a href="#skillss" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Skills</a>
           <a href="#contact" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Contact</a>
       </div>
       
@@ -400,8 +506,8 @@
         <!-- Hamburger Menu (for small screens) -->
         <div class="text-white md:hidden flex items-center gap-10">
           <button class="btn bg-gradient-to-t from-[#012274] via-[#12376e] to-[#23487f]">
-            <span class="btn-text-one">Resume</span>
-            <span class="btn-text-two text-2xl"><a href="https://drive.google.com/file/d/1QYrqCVO629oHLBSmPEvZozUOvP8S9yEH/view?usp=sharing" target="_blank">Resume</a></span>
+            <span class="btn-text-one"><a href="https://drive.google.com/file/d/16cZ2gOnzX4Bk-WsErTzQJ6GdK_RPI6Rz/view?usp=sharing" target="_blank">Resume</a></span>
+            <span class="btn-text-two text-2xl"><a href="https://drive.google.com/file/d/16cZ2gOnzX4Bk-WsErTzQJ6GdK_RPI6Rz/view?usp=sharing" target="_blank">Resume</a></span>
         </button>
             <i class="ri-menu-2-line text-2xl cursor-pointer" id="hamburger"></i>
         </div>
@@ -412,9 +518,10 @@
       <a href="#home" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Home</a>
       <a href="#education" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Education</a>
       <a href="#projects" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Projects</a>
+      <a href="#skillss" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Skills</a>
       <a href="#contact" class="nav-link text-lg font-mono font-semibold uppercase hover:text-teal-400">Contact</a>
     
-      <div class="p-4 h-[8vh] mt-2 bg-gray-400 rounded-lg shadow-lg flex items-center space-x-4 transition-all hover:bg-gray-700">
+      <div class="p-2 h-[6vh] mt-2 bg-zinc-800 rounded-lg shadow-lg flex items-center space-x-4 transition-all hover:bg-gray-700">
         <a href="https://github.com/aAdi0103" target="_blank" class="flex items-center text-white hover:text-teal-400">
             <i class="ri-github-fill text-2xl"></i>
             <span class="ml-2 text-lg">GitHub Profile</span>
@@ -460,7 +567,7 @@
     </div>
      </div>
         
-     <div class="w-full min-h-[100vh] flex flex-col bg-gray-900 py-10">
+     <div id="skillss" class="w-full min-h-[100vh] flex flex-col bg-gray-900 py-10">
             <!-- Heading Section -->
             <div class="mt-3 flex items-center justify-center flex-col text-white">
                 <h1 class="font-mono font-extrabold text-5xl text-transparent bg-gradient-to-r from-teal-400 via-blue-500 to-purple-500 bg-clip-text animate-pulse">
@@ -966,7 +1073,7 @@
             </div>
             
            <!-- Educatuion -->
-           <div id="education" class="opacity-0 max-md:opacity-1 min-h-[100vh] w-full mt-6 max-md:mt-[-30px] p-4 flex justify-center gap-[5vw] items-center max-md:p-3">
+           <div id="education" class="opacity-0 max-md:opacity-1 min-h-[100vh] w-full mt-6 max-md:mt-[-30px] p-4 flex justify-center gap-[7vw] items-center max-md:p-3">
             <!-- Left Section -->
             <div class="flex gap-7 justify-center items-center">
               <div>
@@ -1030,6 +1137,7 @@
                     </p>
                   </div>
                 </div>
+
               </div>
             </div>
           </div>
@@ -1161,7 +1269,7 @@ function initAnimations() {
             stagger: 0.4,
             scrollTrigger: {
                 trigger: "#education", // Trigger when #education enters the viewport
-                start: "top 20%",
+                start: "top 70%",
                 scrub: true,
             },
         });
